@@ -64,7 +64,7 @@ func testSqrt(useBigNumbers bool, precision int) bool {
 }
 
 func testPrecision(precision int) bool {
-	for i := 0; i < 100000; i++ {
+	for i := 0; i < 1000000; i++ {
 		result := testSqrt(true, precision)
 		if !result {
 			return false
@@ -84,16 +84,16 @@ func main() {
 	case "small":
 		fmt.Println("Testing 10 small numbers:")
 		for i := 0; i < 10; i++ {
-			testSqrt(false, 36)
+			testSqrt(false, 37)
 		}
 	case "big":
 		fmt.Println("Testing 10 big numbers:")
 		for i := 0; i < 10; i++ {
-			testSqrt(true, 36)
+			testSqrt(true, 37)
 		}
 	case "precision":
 		fmt.Println("Finding minimum level of precision:")
-		precision := 1
+		precision := 36
 		for ; !testPrecision(precision); precision++ {
 		}
 		fmt.Println("Minimum level of precision necessary", precision)
