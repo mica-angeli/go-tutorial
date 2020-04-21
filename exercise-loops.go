@@ -1,6 +1,7 @@
 package main
 
 import (
+	"flag"
 	"fmt"
 	"math"
 	"math/rand"
@@ -72,20 +73,29 @@ func testPrecision(precision int) bool {
 }
 
 func main() {
-	fmt.Println("Testing 10 small numbers:")
-	for i := 0; i < 10; i++ {
-		testSqrt(false, 36)
-	}
+	var mode string
+	flag.StringVar(&mode, "mode", mode, "Name of test to run.  Choices are small, big, precision")
+	flag.Parse()
 
-	fmt.Println("Testing 10 big numbers:")
-	for i := 0; i < 10; i++ {
-		testSqrt(true, 36)
+	switch mode {
+	case "small":
+		fmt.Println("Testing 10 small numbers:")
+		for i := 0; i < 10; i++ {
+			testSqrt(false, 36)
+		}
+	case "big":
+		fmt.Println("Testing 10 big numbers:")
+		for i := 0; i < 10; i++ {
+			testSqrt(true, 36)
+		}
+	case "precision":
+		fmt.Println("Finding minimum level of precision:")
+		precision := 1
+		for ; !testPrecision(precision); precision++ {
+		}
+		fmt.Println("Minimum level of precision necessary", precision)
+	default:
+		panic("Invalid mode argument")
 	}
-
-	fmt.Println("Finding minimum level of precision:")
-	precision := 1
-	for ; !testPrecision(precision); precision++ {
-	}
-	fmt.Println("Minimum level of precision necessary", precision)
 
 }
