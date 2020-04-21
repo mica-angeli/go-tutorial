@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"math"
 	"math/rand"
+	"time"
 )
 
 func sqrt(x float64, precision int) float64 {
@@ -73,6 +74,8 @@ func testPrecision(precision int) bool {
 }
 
 func main() {
+	rand.Seed(time.Now().UnixNano())
+
 	var mode string
 	flag.StringVar(&mode, "mode", mode, "Name of test to run.  Choices are small, big, precision")
 	flag.Parse()
