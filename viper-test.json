@@ -1,0 +1,8 @@
+{
+    "testy_manager": {
+        "upload_dir": ["/tmp/check_robot_bags"],
+        "search_interval": "1h",
+        "checker_cmd": "check_robot_bags",
+        "args": ["-i", "/var/log/bagfiles", "-o", "/tmp/check_robot_bags"]
+      }
+}
