@@ -29,14 +29,20 @@ func getTestyManagerConfig() *Config {
 	// if !ok {
 	// 	return fmt.Errorf("Error parsing testy_manager")
 	// }
-	cfg := Config{}
-	fmt.Println(cfg)
-	return &cfg
+
+	sliceInterfacesToSliceStrings := func(values []interface{}) []string {
+		var output []string
+		for _, val := range values {
+			output = append(output, val.(string))
+		}
+		return output
+	}
+	// searchIntervalStr := testy["search_interval"].(string)
 	return &Config{
-		// Directories:    testy["upload_dir"].([]string),
-		// SearchInterval: testy["search_interval"].(time.Duration),
+		Directories: sliceInterfacesToSliceStrings(testy["upload_dir"].([]interface{})),
+		// SearchInterval: time.Duration(searchIntervalStr),
 		Command: testy["checker_cmd"].(string),
-		// Args:           testy["args"].([]string),
+		Args:    sliceInterfacesToSliceStrings(testy["args"].([]interface{})),
 	}
 }
 
