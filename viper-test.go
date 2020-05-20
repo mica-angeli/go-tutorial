@@ -34,6 +34,7 @@ func getTestyManagerConfig() *Config {
 
 func main() {
 	initConfig("viper-test.json")
-	cfg := getTestyManagerConfig()
-	fmt.Println("Config:", cfg)
+	// cfg := getTestyManagerConfig()
+	cmds := viper.Get("testy_manager")
+	fmt.Println("Cmds:", cmds)
 }
