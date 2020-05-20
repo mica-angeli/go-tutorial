@@ -1,7 +1,7 @@
 {
   "testy_manager": {
-    "cmds": [
-      {
+    "cmds": {
+      "testy": {
         "upload_dir": [
           "/tmp/check_robot_bags"
         ],
@@ -14,6 +14,6 @@
           "/tmp/check_robot_bags"
         ]
       }
-    ]
+    }
   }
 }

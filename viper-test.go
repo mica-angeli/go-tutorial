@@ -24,17 +24,33 @@ func initConfig(conf string) error {
 }
 
 func getTestyManagerConfig() *Config {
+	cmds := viper.GetStringMap("testy_manager.cmds")
+	testy, _ := cmds["testy"].(map[string]interface{})
+	// if !ok {
+	// 	return fmt.Errorf("Error parsing testy_manager")
+	// }
+	cfg := Config{}
+	fmt.Println(cfg)
+	return &cfg
 	return &Config{
-		Directories:    viper.GetStringSlice("testy_manager.upload_dir"),
-		SearchInterval: viper.GetDuration("testy_manager.search_interval"),
-		Command:        viper.GetString("testy_manager.checker_cmd"),
-		Args:           viper.GetStringSlice("testy_manager.args"),
+		// Directories:    testy["upload_dir"].([]string),
+		// SearchInterval: testy["search_interval"].(time.Duration),
+		Command: testy["checker_cmd"].(string),
+		// Args:           testy["args"].([]string),
 	}
 }
 
 func main() {
 	initConfig("viper-test.json")
-	// cfg := getTestyManagerConfig()
-	cmds := viper.Get("testy_manager")
-	fmt.Println("Cmds:", cmds)
+
+	cmds := viper.GetStringMap("testy_manager.cmds")
+	testy, _ := cmds["testy"].(map[string]interface{})
+	fmt.Println("Directories:", testy["upload_dir"])
+	fmt.Println("SearchInterval:", testy["search_interval"])
+	fmt.Println("Command:", testy["checker_cmd"])
+	fmt.Println("Args:", testy["args"])
+
+	cfg := getTestyManagerConfig()
+	fmt.Println("Cfg:", cfg)
+
 }
